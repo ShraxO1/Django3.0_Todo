@@ -8,10 +8,15 @@
     <p>{{ form.title }}</p>
     <input class="btn btn-info" type="submit" name="Create form">
 </form>
+
 {% for task in tasks %}
-<div class="item-row">
-<a href="{% url 'update_task' task.id %}" class="btn btn-sm btn-info">Update</a>
-    <a href="{% url 'delete' task.id %}" class="btn btn-sm btn-danger">delete</a>
+<div class="item-row ">
+
+    <form class="form-group" action="/delete/{{ task.id }}/" method="post">
+        {% csrf_token %}
+        <a href="{% url 'update_task' task.id %}" class="btn btn-sm btn-info">Update</a>
+<button type="submit" value="remove" class="btn btn-sm btn-danger">Delete</button>
+    </form>
 {% if task.complete == True %}
 <strike>{{ task }}</strike>
     {% else %}
